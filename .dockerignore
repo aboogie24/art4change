@@ -1,0 +1,41 @@
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# GitHub workflows
+.github
+
+# Documentation
+*.md
+DOCKER_DEPLOYMENT.md
+file-split-analysis.md
+
+# Docker files
+docker-compose.yml
+Dockerfile
+
+# Data and scripts (not needed in the image)
+data/
+scripts/
+styles/
+
+# Development files
+.DS_Store
+.vscode
+.idea
+*.log
+*.swp
+*.bak
+*~
+
+# Documentation
+Goodsound/DOCUMENTATION/
+
+# Index files in root (using HTML_TEMPLATE version)
+index.html
+index2.html
+
+# Node modules (if any)
+node_modules/
+npm-debug.log
