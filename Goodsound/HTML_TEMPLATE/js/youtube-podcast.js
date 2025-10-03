@@ -88,7 +88,7 @@ async function fetchYouTubeVideos() {
 
 // Create HTML for favorite podcasts (first 3)
 function createFavoritePodcastHTML(video, index) {
-    const modalId = `modal-fav-${index}`;
+    const modalId = `ep-${index}`;
     const duration = formatDuration(video.duration);
     const date = formatDate(video.publishedAt);
     
