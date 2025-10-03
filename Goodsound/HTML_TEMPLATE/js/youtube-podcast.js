@@ -119,7 +119,7 @@ function createFavoritePodcastHTML(video, index) {
                 </div>
                 <h5 class="font-1 fw-bold lh-1">${video.title}</h5>
             </div>
-            <div class="modal fade bg-overlay" id="${modalId}" tabindex="-1" aria-hidden="true">
+            <div class="modal fade" id="${modalId}" tabindex="-1" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content bg-dark-color">
                         <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050;"></button>
@@ -133,7 +133,7 @@ function createFavoritePodcastHTML(video, index) {
 
 // Create HTML for recent episodes
 function createRecentEpisodeHTML(video, index) {
-    const modalId = `episode-${index}`;
+    const modalId = `modal-fav-${index}`;
     const duration = formatDuration(video.duration);
     const date = formatDate(video.publishedAt);
     
@@ -164,7 +164,7 @@ function createRecentEpisodeHTML(video, index) {
                 </div>
                 <h5 class="font-1 fw-bold lh-1">${video.title}</h5>
             </div>
-            <div class="modal fade bg-overlay" id="${modalId}" tabindex="-1" aria-hidden="true">
+            <div class="modal fade" id="${modalId}" tabindex="-1" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content bg-dark-color">
                         <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050;"></button>
@@ -176,13 +176,23 @@ function createRecentEpisodeHTML(video, index) {
     `;
 }
 
+// Track if modal handlers have been initialized to prevent duplicate listeners
+let modalHandlersInitialized = false;
+
 // Initialize modal event listeners using event delegation
 function initializeModalHandlers() {
+    // Only initialize once to prevent duplicate event listeners
+    if (modalHandlersInitialized) {
+        return;
+    }
+    modalHandlersInitialized = true;
+    
     // Use event delegation on the document to handle dynamically added modals
     document.addEventListener('show.bs.modal', function (event) {
         const modal = event.target;
         const button = event.relatedTarget;
         
+        // Only handle modals with data-video-id attribute
         if (button && button.hasAttribute('data-video-id')) {
             const videoId = button.getAttribute('data-video-id');
             const container = modal.querySelector('.modal-video-container');
@@ -209,39 +219,113 @@ function initializeModalHandlers() {
             // Clear iframe to stop video playback
             container.innerHTML = '';
         }
+        
+        // Use setTimeout to allow Bootstrap to finish its cleanup first
+        // This prevents interfering with Bootstrap's focus management
+        setTimeout(() => {
+            // Clean up any stuck modal backdrops
+            const backdrops = document.querySelectorAll('.modal-backdrop');
+            if (backdrops.length > 0) {
+                backdrops.forEach(backdrop => backdrop.remove());
+                
+                // Only clean up body if there are no open modals
+                const openModals = document.querySelectorAll('.modal.show');
+                if (openModals.length === 0) {
+                    document.body.classList.remove('modal-open');
+                    document.body.style.overflow = '';
+                    document.body.style.paddingRight = '';
+                }
+            }
+        }, 50);
     });
+    
 }
 
 // Initialize and load podcasts
 async function loadPodcasts() {
-    const videos = await fetchYouTubeVideos();
-    
-    if (videos.length === 0) {
-        console.error('No videos found or error loading videos');
-        return;
+    try {
+        const videos = await fetchYouTubeVideos();
+        
+        if (videos.length === 0) {
+            console.error('No videos found or error loading videos');
+            return;
+        }
+        
+        // Load favorite podcasts (first 3 videos)
+        const favoritesContainer = document.getElementById('favorite-podcasts');
+        if (favoritesContainer) {
+            const favoriteVideos = videos.slice(0, 3);
+            favoritesContainer.innerHTML = favoriteVideos
+                .map((video, index) => createFavoritePodcastHTML(video, index))
+                .join('');
+        }
+        
+        // Load recent episodes (next 6 videos, or all if less than 9 total)
+        const recentContainer = document.getElementById('recent-episodes');
+        if (recentContainer) {
+            const recentVideos = videos.slice(3, 9);
+            recentContainer.innerHTML = recentVideos
+                .map((video, index) => createRecentEpisodeHTML(video, index))
+                .join('');
+        }
+    } catch (error) {
+        console.error('Error loading podcasts:', error);
     }
-    
-    // Load favorite podcasts (first 3 videos)
-    const favoritesContainer = document.getElementById('favorite-podcasts');
-    if (favoritesContainer) {
-        const favoriteVideos = videos.slice(0, 3);
-        favoritesContainer.innerHTML = favoriteVideos
-            .map((video, index) => createFavoritePodcastHTML(video, index))
-            .join('');
-    }
-    
-    // Load recent episodes (next 6 videos, or all if less than 9 total)
-    const recentContainer = document.getElementById('recent-episodes');
-    if (recentContainer) {
-        const recentVideos = videos.slice(3, 9);
-        recentContainer.innerHTML = recentVideos
-            .map((video, index) => createRecentEpisodeHTML(video, index))
-            .join('');
-    }
-    
-    // Initialize modal handlers after content is loaded
-    initializeModalHandlers();
 }
+
+// Handle bfcache (back/forward cache) compatibility
+function handlePageHide(event) {
+    // Clean up all video iframes when page is about to be cached
+    const allModals = document.querySelectorAll('.modal-video-container');
+    allModals.forEach(container => {
+        container.innerHTML = '';
+    });
+    
+    // Close any open modals
+    const openModals = document.querySelectorAll('.modal.show');
+    openModals.forEach(modal => {
+        const bsModal = bootstrap.Modal.getInstance(modal);
+        if (bsModal) {
+            bsModal.hide();
+        }
+    });
+}
+
+function handlePageShow(event) {
+    // If page was restored from bfcache, ensure everything is clean
+    if (event.persisted) {
+        // Clean up any lingering video containers
+        const allModals = document.querySelectorAll('.modal-video-container');
+        allModals.forEach(container => {
+            container.innerHTML = '';
+        });
+        
+        // Ensure no modals are stuck open
+        const openModals = document.querySelectorAll('.modal.show');
+        openModals.forEach(modal => {
+            modal.classList.remove('show');
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+        });
+        
+        // Remove any modal backdrops
+        const backdrops = document.querySelectorAll('.modal-backdrop');
+        backdrops.forEach(backdrop => backdrop.remove());
+        
+        // Remove modal-open class from body
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+    }
+}
+
+// Initialize modal handlers immediately (before any content loads)
+// This ensures handlers are ready before any modals can be opened
+initializeModalHandlers();
+
+// Add bfcache event listeners
+window.addEventListener('pagehide', handlePageHide);
+window.addEventListener('pageshow', handlePageShow);
 
 // Load podcasts when DOM is ready
 if (document.readyState === 'loading') {

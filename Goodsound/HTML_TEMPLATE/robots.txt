@@ -1,0 +1,21 @@
+# Robots.txt file for Art4Change
+# Generated for SEO optimization
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://art4change.justpurple.org/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Disallow certain paths (if any)
+Disallow: /php/
+Disallow: /js/vendor/
+Disallow: /*.json$
+
+# Allow CSS and JS for better crawling
+Allow: /css/
+Allow: /js/
+Allow: /image/

@@ -19,10 +19,6 @@ services:
       - "com.portainer.application=art-for-change"
       - "com.portainer.description=Art For Change Podcast Website"
       - "com.portainer.category=web"
-      # Traefik labels (if using Traefik reverse proxy)
-      - "traefik.enable=true"
-      - "traefik.http.routers.art4change.rule=Host(`your-domain.com`)"
-      - "traefik.http.services.art4change.loadbalancer.server.port=80"
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
       interval: 30s

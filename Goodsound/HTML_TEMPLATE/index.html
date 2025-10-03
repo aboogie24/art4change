@@ -4,9 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Art For Change - Where creativity meets purpose. Amplifying voices of artists, activists, and changemakers using creative power to inspire positive transformation in the world.">
+    <meta name="theme-color" content="#e16411">
+    
     <link rel="icon" type="image/png" href="image/logo4.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="css/style.css">
-    <title>Art 4 Change - Home</title>
+    <title>Art 4 Change - Where Creativity Meets Purpose | Home</title>
 </head>
 
 <body>
@@ -112,11 +117,11 @@
                                 Where creativity meets purpose. Amplifying voices for positive change.
                             </p>
                             <div class="d-flex flex-lg-row flex-column gap-lg-5 gap-4">
-                                <a href="" class="btn button font-1 ls-2">LEARN MORE</a>
+                                <a href="about_us.html" class="btn button font-1 ls-2" aria-label="Learn more about Art 4 Change">LEARN MORE</a>
                                 <div class="d-flex flex-row gap-3 align-items-center">
                                     <button type="button" class="btn request-loader" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">
-                                        <i class="fa-solid fa-play ms-1"></i>
+                                        data-bs-target="#exampleModal" aria-label="Play introduction video">
+                                        <i class="fa-solid fa-play ms-1" aria-hidden="true"></i>
                                     </button>
                                     <span class="font-1 ls-2 fw-bold">START LISTENING</span>
                                 </div>
@@ -126,10 +131,11 @@
                 </div>
             </div>
             <!-- Modal -->
-            <div class="modal fade bg-overlay" id="exampleModal" tabindex="-1" aria-hidden="true">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content bg-dark-color">
-                        <iframe class="ifr-video" src="https://www.youtube.com/embed/FK2RaJ1EfA8?autoplay=1"></iframe>
+                        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050;"></button>
+                        <div class="modal-video-container" data-video-id="FK2RaJ1EfA8"></div>
                     </div>
                 </div>
             </div>
@@ -141,19 +147,19 @@
                 <div class="row row-cols-1 row-cols-lg-4 ps-5 ps-lg-0">
                     <div class="col mb-4 mb-lg-0">
                         <div class="d-flex flex-column">
-                            <h2 class="font-1 fw-bold m-0">20<sup>M</sup></h2>
+                            <p class="font-1 fw-bold m-0 display-4">20<sup>M</sup></p>
                             <p class="fs-5 m-0">Our Subscribers</p>
                         </div>
                     </div>
                     <div class="col mb-4 mb-lg-0">
                         <div class="d-flex flex-column">
-                            <h2 class="font-1 fw-bold m-0">150<sup>+</sup></h2>
+                            <p class="font-1 fw-bold m-0 display-4">150<sup>+</sup></p>
                             <p class="fs-5 m-0">Podcast Episodes</p>
                         </div>
                     </div>
                     <div class="col mb-4 mb-lg-0">
                         <div class="d-flex flex-column">
-                            <h2 class="font-1 fw-bold m-0">83<sup>K</sup></h2>
+                            <p class="font-1 fw-bold m-0 display-4">83<sup>K</sup></p>
                             <p class="fs-5 m-0">Our Followers</p>
                         </div>
                     </div>
@@ -165,7 +171,7 @@
         <section class="section">
             <div class="r-container">
                 <div class="d-flex flex-column gap-3 text-center">
-                    <h3 class="font-1 fw-bold">Most <span class="accent-color">Favorite</span> Podcast</h3>
+                    <h2 class="font-1 fw-bold">Most <span class="accent-color">Favorite</span> Podcast</h2>
                     <p class="mx-auto text-gray" style="max-width: 768px;">Lorem ipsum dolor sit amet, consectetur
                         adipiscing
                         elit. Morbi pharetra magna a lacus dignissim, sed scelerisque elit rutrum. Nam a pulvinar
@@ -186,7 +192,7 @@
                 <div class="row row-cols-1 row-cols-lg-2 w-100">
                     <div class="col mb-lg-0 mb-5">
                         <div class="d-flex flex-column gap-3 h-100 justify-content-center">
-                            <span class="fs-5">About Us</span>
+                            <h2 class="fs-5 font-1 fw-bold">About Us</h2>
                             <h3 class="font-1 fw-bold lh-1">We Provide The <span class="accent-color">Latest</span>
                                 Podcast For You</h3>
                             <p class="text-gray">
@@ -223,19 +229,19 @@
                                 <div class="position-absolute start-0 top-0 w-100 h-100" style="z-index: 2;">
                                     <div class="d-flex justify-content-center align-items-center h-100">
                                         <button type="button" class="btn request-loader" data-bs-toggle="modal"
-                                            data-bs-target="#modal-about">
-                                            <i class="fa-solid fa-play ms-1"></i>
+                                            data-bs-target="#modal-about" aria-label="Play about us video">
+                                            <i class="fa-solid fa-play ms-1" aria-hidden="true"></i>
                                         </button>
                                     </div>
                                 </div>
                                 <img src="image/ai_art.JPEG" alt="image" class="img-fluid w-100 rounded-4">
                             </div>
                         </div>
-                        <div class="modal fade bg-overlay" id="modal-about" tabindex="-1" aria-hidden="true">
+                        <div class="modal fade" id="modal-about" tabindex="-1" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
                             <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content bg-dark-color">
-                                    <iframe class="ifr-video"
-                                        src="https://www.youtube.com/embed/FK2RaJ1EfA8?autoplay=1"></iframe>
+                                    <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050;"></button>
+                                    <div class="modal-video-container" data-video-id="FK2RaJ1EfA8"></div>
                                 </div>
                             </div>
                         </div>
@@ -248,7 +254,7 @@
         <section class="section">
             <div class="r-container">
                 <div class="d-flex flex-column gap-3 text-center">
-                    <span class="fs-5">Our Team</span>
+                    <h2 class="fs-5 font-1 fw-bold">Our Team</h2>
                     <h3 class="font-1 fw-bold">Meet Our <span class="accent-color">Host</span></h3>
                     <p class="mx-auto text-gray" style="max-width: 768px;">Lorem ipsum dolor sit amet, consectetur
                         adipiscing
@@ -263,14 +269,14 @@
                                     <span class="accent-color">Expert Host</span>
                                 </div>
                                 <div class="social-container mb-3 justify-content-center">
-                                    <a href="https://www.facebook.com" class="social-item">
-                                        <i class="fa-brands fa-facebook-f"></i>
+                                    <a href="https://www.facebook.com" class="social-item" aria-label="Follow Mister Sapiosexual on Facebook" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
                                     </a>
-                                    <a href="https://www.twitter.com" class="social-item">
-                                        <i class="fa-brands fa-twitter"></i>
+                                    <a href="https://www.twitter.com" class="social-item" aria-label="Follow Mister Sapiosexual on Twitter" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-brands fa-twitter" aria-hidden="true"></i>
                                     </a>
-                                    <a href="https://www.youtube.com" class="social-item">
-                                        <i class="fa-brands fa-youtube"></i>
+                                    <a href="https://www.youtube.com" class="social-item" aria-label="Subscribe to Mister Sapiosexual on YouTube" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-brands fa-youtube" aria-hidden="true"></i>
                                     </a>
                                 </div>
                             </div>
@@ -449,7 +455,7 @@
                     </div>
                     <div class="col col-lg-6">
                         <div class="d-flex flex-column gap-3">
-                            <span class="fs-5">Testimonials</span>
+                            <h2 class="fs-5 font-1 fw-bold">Testimonials</h2>
                             <h3 class="font-1 fw-bold lh-1">What <span class="accent-color">Listener</span> Says</h3>
                             <p class="text-gray">
                                 Phasellus facilisis, neque id dapibus commodo, est libero ultricies felis, venenatis
@@ -461,7 +467,7 @@
                                 turpis. Curabitur vel congue quam. consectetur adipiscing elit.
                             </p>
                             <div>
-                                <a href="" class="btn button font-1 ls-2">ALL TESTIMONIALS
+                                <a href="blog.html" class="btn button font-1 ls-2" aria-label="View all testimonials">ALL TESTIMONIALS
                                 </a>
                             </div>
                         </div>
@@ -475,7 +481,7 @@
             <div class="texture-overlay"></div>
             <div class="r-container position-relative" style="z-index: 2;">
                 <div class="d-flex flex-column text-center gap-3">
-                    <span class="fs-5">Our Podcast</span>
+                    <h2 class="fs-5 font-1 fw-bold">Our Podcast</h2>
                     <h3 class="font-1 fw-bold lh-1"><span class="accent-color">Recent</span> Episodes</h3>
                     <div class="row row-cols-1 row-cols-lg-3" id="recent-episodes">
                         <!-- Dynamic content loaded from YouTube -->
@@ -484,7 +490,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <a href="" class="btn button font-1 ls-2">VIEW ALL PODCASTS
+                        <a href="podcasts.html" class="btn button font-1 ls-2" aria-label="View all podcast episodes">VIEW ALL PODCASTS
                         </a>
                     </div>
                 </div>
@@ -499,8 +505,8 @@
                     <div class="image-overlay-2"></div>
                     <div class="row row-cols-1 row-cols-lg-2 position-relative" style="z-index: 2;">
                         <div class="col  mb-3">
-                            <h3 class="font-1 fw-bold lh-1"><span class="accent-color">Subscribe</span> For The Latest
-                                Episodes</h3>
+                            <h2 class="font-1 fw-bold lh-1"><span class="accent-color">Subscribe</span> For The Latest
+                                Episodes</h2>
                             <p class="text-gray">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
                                 ullamcorper mattis, pulvinar dapibus leo.
@@ -513,10 +519,10 @@
                                     <input type="text" name="action" value="subscribe" hidden>
                                     <div class="input-group mb-3">
                                         <input type="email" name="email" class="form-control py-3 px-4 form-white"
-                                            placeholder="Your Email" aria-label="Recipient's username"
+                                            placeholder="Your Email" aria-label="Email address for newsletter subscription"
                                             aria-describedby="button-addon2" required>
                                         <button class="btn button btn_submit-subscribe font-1  fw-bold px-5"
-                                            type="submit" id="button-addon2">Subscribe</button>
+                                            type="submit" id="button-addon2" aria-label="Subscribe to newsletter">Subscribe</button>
                                     </div>
                                 </form>
                             </div>
@@ -544,7 +550,7 @@
         <section class="section bg-secondary-color">
             <div class="r-container">
                 <div class="d-flex flex-column text-center gap-3">
-                    <span class="fs-5">Our Partners</span>
+                    <h2 class="fs-5 font-1 fw-bold">Our Partners</h2>
                     <h3 class="font-1 fw-bold lh-1">In <span class="accent-color">Collaboration</span> With</h3>
                     <p class="mx-auto text-gray" style="max-width: 768px;">Lorem ipsum dolor sit amet, consectetur
                         adipiscing
@@ -609,7 +615,7 @@
                     </div>
                     <div class="col col-lg-5 ps-lg-5 mb-3">
                         <div class="d-flex flex-column h-100 justify-content-center gap-3">
-                            <span class="fs-5">Our Blog</span>
+                            <h2 class="fs-5 font-1 fw-bold">Our Blog</h2>
                             <h3 class="font-1 fw-bold lh-1"><span class="accent-color">Latest</span> News For You</h3>
                             <p class="mx-auto text-gray" style="max-width: 768px;">Lorem ipsum dolor sit amet,
                                 Phasellus facilisis, neque id dapibus commodo, est libero ultricies felis, venenatis
@@ -620,7 +626,7 @@
                                 turpis. Curabitur vel congue quam.
                             </p>
                             <div>
-                                <a href="" class="btn button font-1 ls-2">ALL BLOGS
+                                <a href="blog.html" class="btn button font-1 ls-2" aria-label="View all blog posts">ALL BLOGS
                                 </a>
                             </div>
                         </div>
@@ -647,20 +653,20 @@
                                     consectetur ipsum purus, a ornare mi finibus quis. egestas a nulla. Fusce tincidunt
                                     blandit ex, vel placerat odio placerat at.
                                 </p>
-                                <div class="social-container mb-lg-0 mb-3">
-                                    <a href="https://www.youtube.com" class="social-item">
-                                        <i class="fa-brands fa-youtube"></i>
-                                    </a>
-                                    <a href="https://www.spotify.com" class="social-item">
-                                        <i class="fa-brands fa-spotify"></i>
-                                    </a>
-                                    <a href="https://www.soundcloud.com" class="social-item">
-                                        <i class="fa-brands fa-soundcloud"></i>
-                                    </a>
-                                    <a href="https://www.twitter.com" class="social-item">
-                                        <i class="fa-brands fa-twitter"></i>
-                                    </a>
-                                </div>
+                        <div class="social-container mb-lg-0 mb-3">
+                            <a href="https://www.youtube.com" class="social-item" aria-label="Visit our YouTube channel" target="_blank" rel="noopener noreferrer">
+                                <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.spotify.com" class="social-item" aria-label="Listen on Spotify" target="_blank" rel="noopener noreferrer">
+                                <i class="fa-brands fa-spotify" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.soundcloud.com" class="social-item" aria-label="Listen on SoundCloud" target="_blank" rel="noopener noreferrer">
+                                <i class="fa-brands fa-soundcloud" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.twitter.com" class="social-item" aria-label="Follow us on Twitter" target="_blank" rel="noopener noreferrer">
+                                <i class="fa-brands fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        </div>
                             </div>
                         </div>
                         <div class="col col-lg-8 mb-3">
@@ -670,24 +676,24 @@
                                         <h5 class="font-1 fw-bold">Pages</h5>
                                         <ul class="list">
                                             <li class="d-flex flex-row align-items-center gap-3">
-                                                <i class="fa-solid fa-chevron-right accent-color"></i>
-                                                <a href="" class="link-white">Home</a>
+                                                <i class="fa-solid fa-chevron-right accent-color" aria-hidden="true"></i>
+                                                <a href="index.html" class="link-white">Home</a>
                                             </li>
                                             <li class="d-flex flex-row align-items-center gap-3">
-                                                <i class="fa-solid fa-chevron-right accent-color"></i>
-                                                <a href="" class="link-white">About Us</a>
+                                                <i class="fa-solid fa-chevron-right accent-color" aria-hidden="true"></i>
+                                                <a href="about_us.html" class="link-white">About Us</a>
                                             </li>
                                             <li class="d-flex flex-row align-items-center gap-3">
-                                                <i class="fa-solid fa-chevron-right accent-color"></i>
-                                                <a href="" class="link-white">Podcasts</a>
+                                                <i class="fa-solid fa-chevron-right accent-color" aria-hidden="true"></i>
+                                                <a href="podcasts.html" class="link-white">Podcasts</a>
                                             </li>
                                             <li class="d-flex flex-row align-items-center gap-3">
-                                                <i class="fa-solid fa-chevron-right accent-color"></i>
-                                                <a href="" class="link-white">Gallery</a>
+                                                <i class="fa-solid fa-chevron-right accent-color" aria-hidden="true"></i>
+                                                <a href="gallery.html" class="link-white">Gallery</a>
                                             </li>
                                             <li class="d-flex flex-row align-items-center gap-3">
-                                                <i class="fa-solid fa-chevron-right accent-color"></i>
-                                                <a href="" class="link-white">Blog</a>
+                                                <i class="fa-solid fa-chevron-right accent-color" aria-hidden="true"></i>
+                                                <a href="blog.html" class="link-white">Blog</a>
                                             </li>
                                         </ul>
                                     </div>
