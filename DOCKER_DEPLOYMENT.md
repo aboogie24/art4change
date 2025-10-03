@@ -20,11 +20,20 @@ This guide explains how to build and deploy the Art For Change Docker image to D
 6. Click **Generate**
 7. **Copy the token** (you won't be able to see it again)
 
-### 2. Configure GitHub Secrets
+### 2. Create GitHub Environment
 
 1. Go to your GitHub repository
-2. Navigate to **Settings** → **Secrets and variables** → **Actions**
-3. Click **New repository secret**
+2. Navigate to **Settings** → **Environments**
+3. Click **New environment**
+4. Name it `dev` (exactly as shown)
+5. Click **Configure environment**
+6. (Optional) Add environment protection rules if needed
+
+### 3. Configure Environment Secrets
+
+1. In the `dev` environment page (Settings → Environments → dev)
+2. Scroll to **Environment secrets**
+3. Click **Add secret**
 4. Add the following secrets:
 
    **DOCKERHUB_USERNAME**
@@ -33,7 +42,9 @@ This guide explains how to build and deploy the Art For Change Docker image to D
    **DOCKERHUB_TOKEN**
    - Value: The access token you created in step 1
 
-### 3. Workflow Configuration
+> **Note:** The workflow is configured to use the `dev` environment, so secrets must be added to the `dev` environment, not as repository secrets.
+
+### 4. Workflow Configuration
 
 The workflow is configured to:
 
