@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  art-for-change-web:
+    # Replace 'YOUR_DOCKERHUB_USERNAME' with your actual Docker Hub username
+    image: aboogie/art4change:latest
+    container_name: art-for-change-podcast
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    networks:
+      - art-for-change-network
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+      - TZ=America/New_York
+    labels:
+      # Portainer labels for better management
+      - "com.portainer.application=art-for-change"
+      - "com.portainer.description=Art For Change Podcast Website"
+      - "com.portainer.category=web"
+      # Traefik labels (if using Traefik reverse proxy)
+      - "traefik.enable=true"
+      - "traefik.http.routers.art4change.rule=Host(`your-domain.com`)"
+      - "traefik.http.services.art4change.loadbalancer.server.port=80"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+networks:
+  art-for-change-network:
+    driver: bridge
+    labels:
+      - "com.portainer.application=art-for-change"
+
+# Optional: Add volumes for custom configuration or SSL certificates
+volumes:
+  nginx-conf:
+    driver: local
+    labels:
+      - "com.portainer.application=art-for-change"
+  ssl-certs:
+    driver: local
+    labels:
+      - "com.portainer.application=art-for-change"
