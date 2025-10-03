@@ -134,6 +134,7 @@ function createFavoritePodcastHTML(video, index) {
 // Create HTML for recent episodes
 function createRecentEpisodeHTML(video, index) {
     const modalId = `modal-fav-${index}`;
+    console.log(modalId);
     const duration = formatDuration(video.duration);
     const date = formatDate(video.publishedAt);
     
