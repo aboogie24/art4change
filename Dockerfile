@@ -1,6 +1,11 @@
 # Use nginx alpine as base image
 FROM nginx:alpine
 
+# Add version and metadata labels
+LABEL version="0.0.1"
+LABEL description="Art for Change Podcast Website"
+LABEL maintainer="Art for Change"
+
 # Copy website files to nginx html directory
 COPY Goodsound/HTML_TEMPLATE /usr/share/nginx/html
 

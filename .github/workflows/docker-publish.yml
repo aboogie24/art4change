@@ -6,7 +6,7 @@ on:
       - main
       - master
     tags:
-      - 'v*'
+      - 'v*.*.*'  # Semantic versioning tags (e.g., v0.0.1, v1.2.3)
   pull_request:
     branches:
       - main
@@ -15,6 +15,7 @@ on:
 
 env:
   DOCKER_IMAGE_NAME: art4change
+  INITIAL_VERSION: 0.0.1
 
 jobs:
   build-and-push:
@@ -60,5 +61,3 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: linux/amd64,linux/arm64
-
-   
