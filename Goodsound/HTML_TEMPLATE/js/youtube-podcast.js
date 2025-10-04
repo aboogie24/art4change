@@ -197,7 +197,7 @@ function initializeModalHandlers() {
         console.log('Modal opening:', modalId);
         
         // Replace modal-backdrop class with modal ID
-        setTimeout(() => {
+        setTmeout(() => {
             const backdrop = document.querySelector('.modal-backdrop');
             if (backdrop && modalId) {
                 backdrop.classList.remove('modal-backdrop');
