@@ -1,11 +1,14 @@
 # Art for Change Podcast - Docker Deployment
 
+**Current Version**: 0.0.1
+
 This repository contains the Docker Compose configuration to deploy the Art for Change Podcast website.
 
 ## Prerequisites
 
 - Docker
 - Docker Compose
+- Git (for versioning and releases)
 
 ## Quick Start
 
@@ -137,4 +140,56 @@ To make changes to the website:
    ```
 
 The changes will be reflected immediately since the HTML file is mounted as a volume.
+
+## Versioning and Releases
+
+This project uses **semantic versioning** (SemVer: MAJOR.MINOR.PATCH).
+
+### Current Version: 0.0.1
+
+For detailed information on how to create releases and push to Docker Hub, see [VERSIONING.md](VERSIONING.md).
+
+### Quick Release Guide
+
+To create and push version 0.0.1:
+
+```bash
+# Commit all changes
+git add .
+git commit -m "Prepare for initial release v0.0.1"
+git push origin main
+
+# Create and push the version tag
+git tag -a v0.0.1 -m "Initial release - version 0.0.1"
+git push origin v0.0.1
+```
+
+The GitHub Action will automatically:
+- Build the Docker image
+- Tag it with `0.0.1`, `0.0`, `0`, and `latest`
+- Push to Docker Hub
+
+### Using Versioned Docker Images
+
+```bash
+# Pull specific version
+docker pull YOUR_DOCKERHUB_USERNAME/art4change:0.0.1
+
+# Run specific version
+docker run -d -p 8080:80 YOUR_DOCKERHUB_USERNAME/art4change:0.0.1
+```
+
+## Documentation
+
+- [VERSIONING.md](VERSIONING.md) - Complete semantic versioning guide
+- [DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md) - Docker deployment details
+- [LIGHTHOUSE_FIXES.md](LIGHTHOUSE_FIXES.md) - Performance optimization notes
+
+## Contributing
+
+When contributing, please:
+1. Follow semantic versioning guidelines
+2. Update version labels in Dockerfile when appropriate
+3. Test changes before creating release tags
+
 # art4change
