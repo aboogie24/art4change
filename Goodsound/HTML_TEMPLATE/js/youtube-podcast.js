@@ -88,7 +88,7 @@ async function fetchYouTubeVideos() {
 
 // Create HTML for favorite podcasts (first 3)
 function createFavoritePodcastHTML(video, index) {
-    const modalId = `ep-${index}`;
+    const modalId = `modal-fav-${index}`;
     const duration = formatDuration(video.duration);
     const date = formatDate(video.publishedAt);
     
@@ -133,7 +133,7 @@ function createFavoritePodcastHTML(video, index) {
 
 // Create HTML for recent episodes
 function createRecentEpisodeHTML(video, index) {
-    const modalId = `modal-fav-${index}`;
+    const modalId = `modal-recent-${index}`;
     console.log(modalId);
     const duration = formatDuration(video.duration);
     const date = formatDate(video.publishedAt);
@@ -192,6 +192,20 @@ function initializeModalHandlers() {
     document.addEventListener('show.bs.modal', function (event) {
         const modal = event.target;
         const button = event.relatedTarget;
+        const modalId = modal.id;
+        
+        console.log('Modal opening:', modalId);
+        
+        // Replace modal-backdrop class with modal ID
+        setTimeout(() => {
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop && modalId) {
+                backdrop.classList.remove('modal-backdrop');
+                backdrop.classList.add(modalId);
+                backdrop.setAttribute('data-modal-id', modalId);
+                console.log('Backdrop class replaced with:', modalId);
+            }
+        }, 50);
         
         // Only handle modals with data-video-id attribute
         if (button && button.hasAttribute('data-video-id')) {
@@ -214,22 +228,29 @@ function initializeModalHandlers() {
     // Handle modal hidden event - remove video when modal closes
     document.addEventListener('hidden.bs.modal', function (event) {
         const modal = event.target;
+        const modalId = modal.id;
         const container = modal.querySelector('.modal-video-container');
+        
+        console.log('Modal closed:', modalId);
         
         if (container) {
             // Clear iframe to stop video playback
             container.innerHTML = '';
         }
         
-        // Use setTimeout to allow Bootstrap to finish its cleanup first
-        // This prevents interfering with Bootstrap's focus management
+        // Give Bootstrap time to clean up, then force cleanup if needed
         setTimeout(() => {
-            // Clean up any stuck modal backdrops
             const backdrops = document.querySelectorAll('.modal-backdrop');
+            console.log('Checking for leftover backdrops:', backdrops.length);
+            
             if (backdrops.length > 0) {
-                backdrops.forEach(backdrop => backdrop.remove());
+                backdrops.forEach(backdrop => {
+                    const backdropModalId = backdrop.getAttribute('data-modal-id');
+                    console.log('Removing stuck backdrop for:', backdropModalId || 'unknown modal');
+                    backdrop.remove();
+                });
                 
-                // Only clean up body if there are no open modals
+                // Check if there are any open modals
                 const openModals = document.querySelectorAll('.modal.show');
                 if (openModals.length === 0) {
                     document.body.classList.remove('modal-open');
@@ -237,7 +258,7 @@ function initializeModalHandlers() {
                     document.body.style.paddingRight = '';
                 }
             }
-        }, 50);
+        }, 350);
     });
     
 }
